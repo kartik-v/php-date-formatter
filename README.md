@@ -123,7 +123,7 @@ This property allows you to configure the terms used for short/long days and mon
     longMonths: ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'],
     meridian: ['AM', 'PM']
-},
+}
 ```
 
 You can override these settings for your language, as shown in the example below:
