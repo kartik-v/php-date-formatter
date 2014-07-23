@@ -131,7 +131,7 @@ You can override these settings for your language, as shown in the example below
 ```js
 frenchSettings = {
     longMonths: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
-        'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre"]
+        'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
 };
 DateFormatter.dateSettings = $.extend(
     {},
