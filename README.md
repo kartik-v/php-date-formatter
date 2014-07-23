@@ -129,14 +129,14 @@ This property allows you to configure the terms used for short/long days and mon
 You can override these settings for your language, as shown in the example below:
 
 ```js
-frenchSettings = {
+var vFrench = {
     longMonths: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
         'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
 };
 DateFormatter.dateSettings = $.extend(
     {},
     DateFormatter.dateSettings,
-    frenchSettings
+    vFrench
 );
 ```
 
