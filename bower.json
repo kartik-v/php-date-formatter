@@ -16,7 +16,8 @@
         "date",
         "time",
         "javascript",
-        "datetime"
+        "datetime",
+        "php-date-formatter.js"
     ],
     "dependencies": {
         "jquery": ">= 1.9.0"

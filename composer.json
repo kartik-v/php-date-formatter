@@ -8,7 +8,8 @@
         "date",
         "time",
         "javascript",
-        "datetime"
+        "datetime",
+        "php-date-formatter.js"
     ],
     "homepage": "https://github.com/kartik-v/php-date-formatter",
     "license": "BSD 3-Clause",
