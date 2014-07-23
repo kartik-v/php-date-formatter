@@ -7,7 +7,7 @@
     ],
     "description": "A JQuery datetime formatting and manipulation library using PHP date-time formats in javascript.",
     "main": [
-        "./js/php-date-formatter.min.js",
+        "./js/php-date-formatter.min.js"
     ],
     "keywords": [
         "jquery",
