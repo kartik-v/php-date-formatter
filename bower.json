@@ -1,0 +1,34 @@
+{
+    "name": "php-date-formatter",
+    "version": "1.2.0",
+    "homepage": "https://github.com/kartik-v/php-date-formatter",
+    "authors": [
+        "Kartik Visweswaran <kartikv2@gmail.com>"
+    ],
+    "description": "A JQuery datetime formatting and manipulation library using PHP date-time formats in javascript.",
+    "main": [
+        "./js/php-date-formatter.min.js",
+    ],
+    "keywords": [
+        "jquery",
+        "formatter",
+        "php",
+        "date",
+        "time",
+        "javascript",
+        "datetime"
+    ],
+    "dependencies": {
+        "jquery": ">= 1.9.0"
+    },
+    "license": "BSD-3",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "composer.json",
+        "examples",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}
