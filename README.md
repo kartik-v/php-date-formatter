@@ -133,12 +133,12 @@ This property allows you to configure the terms used for short/long days and mon
 You can override these settings for your language, as shown in the example below:
 
 ```js
-var fmt = new DateFormatter(
+var fmt = new DateFormatter({
     dateSettings: {
         longMonths: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
             'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
     }
-};
+});
 ```
 
 #### separators
