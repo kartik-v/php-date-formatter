@@ -117,7 +117,7 @@ alert(d2); // will return: 23-Sep-2013 09:24:12
 You can control the following options/settings for DateFormatter. 
 
 #### dateSettings
-This property allows you to configure the terms used for short/long days and months, and the meridian. This is defaulted to:
+This property allows you to configure the terms used for short/long days and months, and the meridiem. This is defaulted to:
 
 ```js
 {
@@ -126,7 +126,7 @@ This property allows you to configure the terms used for short/long days and mon
     shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     longMonths: ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'],
-    meridian: ['AM', 'PM']
+    meridiem: ['AM', 'PM']
 }
 ```
 

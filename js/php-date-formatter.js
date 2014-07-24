@@ -15,12 +15,12 @@
  */
 var defaultConfig = {
     dateSettings: {
-        longDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        longMonths: ['January', 'February', 'March', 'April', 'May', 'June',
+        days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'],
-        meridian: ['AM', 'PM']
+        monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        meridiem: ['AM', 'PM']
     },
     separators: /[ \-+\/\.T:@]/g,
     validParts: /[djDlwSFmMnyYaAgGhHisU]/g
@@ -83,11 +83,11 @@ DateFormatter.prototype = {
                     case 'F':
                         var vMonth;
                         if (isNaN(vDateParts[i])) {
-                            vMonth = self.dateSettings.shortMonths.indexOf(vDateParts[i]);
+                            vMonth = self.dateSettings.monthsShort.indexOf(vDateParts[i]);
                             if (vMonth > -1) {
                                 parsedDateTime.month = vMonth + 1;
                             }
-                            vMonth = self.dateSettings.longMonths.indexOf(vDateParts[i]);
+                            vMonth = self.dateSettings.months.indexOf(vDateParts[i]);
                             if (vMonth > -1) {
                                 parsedDateTime.month = vMonth + 1;
                             }
@@ -111,8 +111,8 @@ DateFormatter.prototype = {
                             (vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1;
 
                         if (vMeriIndex > -1) {
-                            var vMeriOffset = (vDateParts[vMeriIndex].toLowerCase == self.dateSettings.meridian[0].toLowerCase) ? 0 :
-                                (vDateParts[vMeriIndex].toLowerCase == self.dateSettings.meridian[1].toLowerCase) ? 12 : -1;
+                            var vMeriOffset = (vDateParts[vMeriIndex].toLowerCase == self.dateSettings.meridiem[0].toLowerCase) ? 0 :
+                                (vDateParts[vMeriIndex].toLowerCase == self.dateSettings.meridiem[1].toLowerCase) ? 12 : -1;
 
                             if (parseInt(vDateParts[i]) >= 1 && parseInt(vDateParts[i]) <= 12 && vMeriOffset > -1) {
                                 parsedDateTime.hour = parseInt(vDateParts[i]) + vMeriOffset - 1;
@@ -238,10 +238,10 @@ DateFormatter.prototype = {
                             vDateStr += ((vDate.getDate() <= 9) ? '0' : '') + vDate.getDate();
                             break;
                         case 'D':
-                            vDateStr += self.dateSettings.shortDays[vDate.getDay()];
+                            vDateStr += self.dateSettings.daysShort[vDate.getDay()];
                             break;
                         case 'l':
-                            vDateStr += self.dateSettings.longDays[vDate.getDay()];
+                            vDateStr += self.dateSettings.days[vDate.getDay()];
                             break;
                         case 'w':
                             vDateStr += vDate.getDay();
@@ -265,10 +265,10 @@ DateFormatter.prototype = {
                             vDateStr += ((vDate.getMonth() <= 8) ? '0' : '') + (vDate.getMonth() + 1);
                             break;
                         case 'F':
-                            vDateStr += self.dateSettings.longMonths[vDate.getMonth()];
+                            vDateStr += self.dateSettings.months[vDate.getMonth()];
                             break;
                         case 'M':
-                            vDateStr += self.dateSettings.shortMonths[vDate.getMonth()];
+                            vDateStr += self.dateSettings.monthsShort[vDate.getMonth()];
                             break;
                         case 'Y':
                             vDateStr += vDate.getFullYear();
@@ -290,7 +290,7 @@ DateFormatter.prototype = {
                             break;
                         case 'a':
                         case 'A':
-                            vDateStr += (vDate.getHours <= 12) ? self.dateSettings.meridian[0] : self.dateSettings.meridian[1];
+                            vDateStr += (vDate.getHours <= 12) ? self.dateSettings.meridiem[0] : self.dateSettings.meridiem[1];
                             break;
                         case 'i':
                             vDateStr += ((vDate.getMinutes() <= 9) ? '0' : '') + vDate.getMinutes();
