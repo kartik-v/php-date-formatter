@@ -13,7 +13,7 @@
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
-var DateFormatter = {
+var defaultConfig = {
     dateSettings: {
         longDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -23,7 +23,18 @@ var DateFormatter = {
         meridian: ['AM', 'PM']
     },
     separators: /[ \-+\/\.T:@]/g,
-    validParts: /[djDlwSFmMnyYaAgGhHisU]/g,
+    validParts: /[djDlwSFmMnyYaAgGhHisU]/g
+};
+
+var DateFormatter = function (options) {
+    var config = $.extend(true, defaultConfig, options);
+    this.dateSettings = config.dateSettings;
+    this.separators = config.separators;
+    this.validParts = config.validParts;
+};
+
+DateFormatter.prototype = {
+    constructor: DateFormatter,
     parseDate: function (vDate, vFormat) {
         if (!vDate) {
             return undefined;

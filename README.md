@@ -11,7 +11,7 @@ server side and client side validation should help in building extensible applic
 - Parse date/time strings or a Date object, and convert it into Javascript Date Object by passing any of the [PHP DateTime formats](http://php.net/manual/en/function.date.php).
 - Automatically guess date/time strings, even if it does not exactly match the format, and convert it into Javascript Date Object.
 - Read date/time strings or a Date object, and format it as per a [PHP DateTime format](http://php.net/manual/en/function.date.php).
-- Size of the entire library is less than 2KB when gzipped, or < 5KB, when minified.
+- Size of the entire library is less than 2KB when gzipped, or < 6KB, when minified.
 
 ## Demo
 
@@ -61,7 +61,8 @@ If you noticed, you need to load the `jquery.min.js` in addition to the `php-dat
 **Step 2** You can now access the library using the `DateFormatter` object. For example, you can convert any date string to javascript date object for a specific PHP date format.
 
 ```js
-var d1 = DateFormatter.parseDate('23-Sep-2013 09:24:12', 'd-M-Y H:i:s');
+var fmt = new DateFormatter();
+var d1 = fmt.DateFormatter.parseDate('23-Sep-2013 09:24:12', 'd-M-Y H:i:s');
 ```
 
 ### DateFormatter Methods
@@ -76,7 +77,8 @@ This method allows you to convert any date string or date object to a javascript
 **Example:**
 
 ```js
-var d1 = DateFormatter.parseDate('23-Sep-2013 09:24:12', 'd-M-Y H:i:s');
+var fmt = new DateFormatter();
+var d1 = fmt.parseDate('23-Sep-2013 09:24:12', 'd-M-Y H:i:s');
 // d1 will return Javascript date object for your timezone
 alert(d1); // will return: Mon Sep 23 2013 09:24:12 GMT+0530 (India Standard Time)
 ```
@@ -91,7 +93,8 @@ This method allows you to intelligently guess the date by closely matching the s
 
 ```js
 // note the passed string and the PHP date-time format differ
-var d1 = DateFormatter.guessDate('23-09-13 09:24:12', 'd-M-Y H:i:s'); 
+var fmt = new DateFormatter();
+var d1 = fmt.guessDate('23-09-13 09:24:12', 'd-M-Y H:i:s'); 
 // d1 will again return Javascript date object for your timezone
 alert(d1); // will return: Mon Sep 23 2013 09:24:12 GMT+0530 (India Standard Time)
 ```
@@ -104,7 +107,8 @@ This method allows you to return a formatted date string using a specific PHP da
 
 ```js
 var d1 = new Date();
-var d2 = DateFormatter.formatDate(d1, 'd-M-Y H:i:s');
+var fmt = new DateFormatter();
+var d2 = fmt.formatDate(d1, 'd-M-Y H:i:s');
 alert(d2); // will return: 23-Sep-2013 09:24:12
 ```
 
@@ -129,15 +133,12 @@ This property allows you to configure the terms used for short/long days and mon
 You can override these settings for your language, as shown in the example below:
 
 ```js
-var vFrench = {
-    longMonths: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
-        'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+var fmt = new DateFormatter(
+    dateSettings: {
+        longMonths: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
+            'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+    }
 };
-DateFormatter.dateSettings = $.extend(
-    {},
-    DateFormatter.dateSettings,
-    vFrench
-);
 ```
 
 #### separators

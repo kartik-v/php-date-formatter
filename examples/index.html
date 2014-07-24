@@ -45,15 +45,17 @@
     </body>
 	<script>
         $(document).on('ready', function() {
-            var d1 = DateFormatter.parseDate($("#kv-1").val(), $("#kv-2").val());
+            var fmt = new DateFormatter();
+            var d1 = fmt.parseDate($("#kv-1").val(), $("#kv-2").val());
             $("#kv-3").val(d1);
-            var d2 = DateFormatter.formatDate($("#kv-1").val(), $("#kv-2").val());
+            var d2 = fmt.formatDate($("#kv-1").val(), $("#kv-2").val());
             $("#kv-4").val(d2);
         });
         $("#kv-5").on("click", function() {
-             var d1 = DateFormatter.parseDate($("#kv-1").val(), $("#kv-2").val());
+            var fmt = new DateFormatter();
+             var d1 = fmt.parseDate($("#kv-1").val(), $("#kv-2").val());
             $("#kv-3").val(d1);
-            var d2 = DateFormatter.formatDate($("#kv-1").val(), $("#kv-2").val());
+            var d2 = fmt.formatDate($("#kv-1").val(), $("#kv-2").val());
             $("#kv-4").val(d2);
         });
 	</script>
