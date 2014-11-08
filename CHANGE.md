@@ -1,12 +1,12 @@
 version 1.2.0
 =============
-Date: 2014-07-02
+Date: 02-Jul-2014
 
 - Enh #8: Ability to pass additional form input data within each ajax call.
 
 version 1.1.0
 =============
-Date: 2014-05-05
+Date: 05-Jul-2014
 
 - Updated placeholder to accept boolean value (false) to disable it.
 - Added loadingClass property to configure the loading indicator CSS.
@@ -15,6 +15,6 @@ Date: 2014-05-05
 
 version 1.0.0
 =============
-Date: 2014-04-30
+Date: 30-Apr-2014
 
 Initial release.
