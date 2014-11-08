@@ -1,3 +1,10 @@
+version 1.3.0
+=============
+**Date:** 08-Nov-2014
+
+1. Set release to stable in composer.json.
+2. Updated CHANGE log to reflect user friendly date time formats.
+
 version 1.2.0
 =============
 Date: 02-Jul-2014
