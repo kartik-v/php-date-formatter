@@ -13,7 +13,6 @@
     ],
     "homepage": "https://github.com/kartik-v/php-date-formatter",
     "license": "BSD 3-Clause",
-    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Kartik Visweswaran",
