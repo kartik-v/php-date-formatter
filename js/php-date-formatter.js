@@ -274,7 +274,7 @@ DateFormatter.prototype = {
                             vDateStr += vDate.getFullYear();
                             break;
                         case 'y':
-                            vDateStr += vDate.getFullYear().substr(2);
+                            vDateStr += vDate.getFullYear().toString().substr(2);
                             break;
                         case 'g':
                             vDateStr += (vDate.getHours() % 12) + 1;
