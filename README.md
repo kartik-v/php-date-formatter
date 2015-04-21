@@ -1,6 +1,12 @@
 php-date-formatter
 ==================
 
+[![BOWER version](https://badge-me.herokuapp.com/api/bower/kartik-v/php-date-formatter.png)](http://badges.enytc.com/for/bower/kartik-v/php-date-formatter)
+[![Latest Stable Version](https://poser.pugx.org/kartik-v/php-date-formatter/v/stable)](https://packagist.org/packages/kartik-v/php-date-formatter)
+[![License](https://poser.pugx.org/kartik-v/php-date-formatter/license)](https://packagist.org/packages/kartik-v/php-date-formatter)
+[![Packagist Downloads](https://poser.pugx.org/kartik-v/php-date-formatter/downloads)](https://packagist.org/packages/kartik-v/php-date-formatter)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/php-date-formatter/d/monthly)](https://packagist.org/packages/kartik-v/php-date-formatter)
+
 A JQuery datetime library that allows you to manipulate date/times using PHP date-time formats in javascript. This library was built with an intention 
 to read and write date/timestamps to the database easily when working with PHP server code. Use cases for this library would involve reading and saving a 
 timestamp to database in one format, but displaying it on client or html forms in another format. Maintaining a consistent PHP Date time format for both 
