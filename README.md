@@ -12,6 +12,8 @@ to read and write date/timestamps to the database easily when working with PHP s
 timestamp to database in one format, but displaying it on client or html forms in another format. Maintaining a consistent PHP Date time format for both 
 server side and client side validation should help in building extensible applications with various PHP frameworks easily.
 
+The latest release of the library is v1.3.1. Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for details.
+
 ## Features
 
 - Parse date/time strings or a Date object, and convert it into Javascript Date Object by passing any of the [PHP DateTime formats](http://php.net/manual/en/function.date.php).

@@ -1,6 +1,6 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @version 1.3.0
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
+ * @version 1.3.1
  *
  * Date formatter utility library, that allows you to format date and 
  * time variables or Date objects using PHP DateTime format.
@@ -191,7 +191,6 @@ DateFormatter.prototype = {
                         break;
                     case 2:
                         var year = vDate.getFullYear();
-
                         if (vParts[i].length < 4) {
                             vDate.setFullYear(parseInt(year.toString().substr(0, 4 - vParts[i].length) + vParts[i]));
                             vDigit = vParts[i].length;
@@ -299,7 +298,7 @@ DateFormatter.prototype = {
                             vDateStr += ((vDate.getSeconds() <= 9) ? '0' : '') + vDate.getSeconds();
                             break;
                         case 'U':
-                            vDateStr += vDate.getMilliseconds() / 1000;
+                            vDateStr += vDate.getTime() / 1000;
                             break;
                     }
 
