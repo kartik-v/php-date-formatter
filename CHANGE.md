@@ -1,6 +1,6 @@
 version 1.3.1
 =============
-**Date:** 30-May-2015
+**Date:** 18-Jun-2015
 
 1. (bug #2): Fix conversion to unix timestamp format.
 

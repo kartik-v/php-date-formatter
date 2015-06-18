@@ -40,11 +40,11 @@ You can use the `bower` package manager to install. Run:
 ### Using Composer
 You can use the `composer` package manager to install. Either run:
 
-    $ php composer.phar require kartik-v/php-date-formatter "dev-master"
+    $ php composer.phar require kartik-v/php-date-formatter "@dev"
 
 or add:
 
-    "kartik-v/php-date-formatter": "dev-master"
+    "kartik-v/php-date-formatter": "@dev"
 
 to your composer.json file
 
