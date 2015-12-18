@@ -129,10 +129,10 @@ This property allows you to configure the terms used for short/long days and mon
 
 ```js
 {
-    longDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    longMonths: ['January', 'February', 'March', 'April', 'May', 'June',
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    monthsShort: ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'],
     meridiem: ['AM', 'PM']
 }
@@ -143,7 +143,7 @@ You can override these settings for your language, as shown in the example below
 ```js
 var fmt = new DateFormatter({
     dateSettings: {
-        longMonths: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
+        months: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
             'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
     }
 });
