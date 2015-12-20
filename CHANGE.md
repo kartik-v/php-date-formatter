@@ -12,7 +12,7 @@ Change Log: `php-date-formatter`
 
 **Date:** 18-Jun-2015
 
-1. (bug #2): Fix con## Version to unix timestamp format.
+1. (bug #2): Fix conversion to unix timestamp format.
 
 ## Version 1.3.0
 

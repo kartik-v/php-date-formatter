@@ -7,7 +7,7 @@
   ],
   "description": "A Javascript datetime formatting and manipulation library using PHP date-time formats.",
   "main": [
-    "./js/php-date-formatter.min.js"
+    "js/php-date-formatter.js"
   ],
   "keywords": [
     "jquery",
@@ -19,9 +19,6 @@
     "datetime",
     "php-date-formatter.js"
   ],
-  "dependencies": {
-    "jquery": ">= 1.9.0"
-  },
   "license": "BSD-3-Clause",
   "ignore": [
     "**/.*",
