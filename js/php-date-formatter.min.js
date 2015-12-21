@@ -1,6 +1,6 @@
 /*!
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version 1.3.2
+ * @version 1.3.3
  *
  * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
  * @see http://php.net/manual/en/function.date.php
