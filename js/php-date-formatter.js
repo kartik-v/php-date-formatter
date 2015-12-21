@@ -545,7 +545,7 @@ var DateFormatter;
                     return vDate.getTime() / 1000 || 0;
                 }
             };
-            return doFormat(vChar, '');
+            return doFormat(vChar, vChar);
         },
         formatDate: function (vDate, vFormat) {
             var self = this, i, n, len, str, vChar, vDateStr = '';
@@ -562,7 +562,7 @@ var DateFormatter;
                     if (vChar === 'S') {
                         continue;
                     }
-                    str = self.validParts.test(vChar) === true ? self.parseFormat(vChar, vDate) : vChar;
+                    str = self.parseFormat(vChar, vDate);
                     if (i !== (len - 1) && self.intParts.test(vChar) && vFormat.charAt(i + 1) === 'S') {
                         n = parseInt(str);
                         str += self.dateSettings.ordinal(n);

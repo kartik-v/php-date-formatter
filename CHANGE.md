@@ -1,6 +1,12 @@
 Change Log: `php-date-formatter`
 ================================
 
+## Version 1.3.3
+
+**Date:** 22-Dec-2015
+
+1. (bug #7): Fix regexp validation for `formatDate`.
+
 ## Version 1.3.2
 
 **Date:** 21-Dec-2015
