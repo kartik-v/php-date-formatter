@@ -2,7 +2,8 @@ php-date-formatter
 ==================
 
 [![BOWER version](https://badge-me.herokuapp.com/api/bower/kartik-v/php-date-formatter.png)](http://badges.enytc.com/for/bower/kartik-v/php-date-formatter)
-[![Latest Stable Version](https://poser.pugx.org/kartik-v/php-date-formatter/v/stable)](https://packagist.org/packages/kartik-v/php-date-formatter)
+[![Stable Version](https://poser.pugx.org/kartik-v/php-date-formatter/v/stable)](https://packagist.org/packages/kartik-v/php-date-formatter)
+[![Unstable Version](https://poser.pugx.org/kartik-v/php-date-formatter/v/unstable)](https://packagist.org/packages/kartik-v/php-date-formatter)
 [![License](https://poser.pugx.org/kartik-v/php-date-formatter/license)](https://packagist.org/packages/kartik-v/php-date-formatter)
 [![Packagist Downloads](https://poser.pugx.org/kartik-v/php-date-formatter/downloads)](https://packagist.org/packages/kartik-v/php-date-formatter)
 [![Monthly Downloads](https://poser.pugx.org/kartik-v/php-date-formatter/d/monthly)](https://packagist.org/packages/kartik-v/php-date-formatter)
@@ -12,7 +13,7 @@ to read and write date/timestamps to the database easily when working with PHP s
 timestamp to database in one format, but displaying it on client or html forms in another format. Maintaining a consistent PHP Date time format for both 
 server side and client side validation should help in building extensible applications with various PHP frameworks easily.
 
-The latest release of the library is v1.3.3. Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for details.
+The latest release of the library is v1.3.4. Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for details.
 
 ## Features
 

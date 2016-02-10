@@ -1,6 +1,13 @@
 Change Log: `php-date-formatter`
 ================================
 
+## Version 1.3.4
+
+**Date:** 10-Feb-2016
+
+1. (enh #9): Enhance validation for invalid input date string in `guessDate`.
+2. (enh #10, #11): Display escaped characters correctly via `formatDate`.
+
 ## Version 1.3.3
 
 **Date:** 22-Dec-2015
