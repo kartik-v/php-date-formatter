@@ -12,7 +12,7 @@ var DateFormatter;
 (function () {
     "use strict";
 
-    var _compare, _lpad, _extend, defaultSettings, DAY, HOUR;
+    var _compare, _lpad, _extend, _indexOf, defaultSettings, DAY, HOUR;
     DAY = 1000 * 60 * 60 * 24;
     HOUR = 3600;
 
@@ -42,6 +42,14 @@ var DateFormatter;
             }
         }
         return out;
+    };
+    _indexOf = function (val, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].toLowerCase() === val.toLowerCase()) {
+                return i;
+            }
+        }
+        return -1;
     };
     defaultSettings = {
         dateSettings: {
@@ -77,6 +85,14 @@ var DateFormatter;
 
     DateFormatter.prototype = {
         constructor: DateFormatter,
+        getMonth: function (val) {
+            var self = this, i;
+            i = _indexOf(val, self.dateSettings.monthsShort) + 1;
+            if (i === 0) {
+                i = _indexOf(val, self.dateSettings.months) + 1;
+            }
+            return i;
+        },
         parseDate: function (vDate, vFormat) {
             var self = this, vFormatParts, vDateParts, i, vDateFlag = false, vTimeFlag = false, vDatePart, iDatePart,
                 vSettings = self.dateSettings, vMonth, vMeriIndex, vMeriOffset, len, mer,
@@ -122,14 +138,10 @@ var DateFormatter;
                     case 'n':
                     case 'M':
                     case 'F':
-                        if (isNaN(vDatePart)) {
-                            vMonth = vSettings.monthsShort.indexOf(vDatePart);
-                            if (vMonth > -1) {
-                                out.month = vMonth + 1;
-                            }
-                            vMonth = vSettings.months.indexOf(vDatePart);
-                            if (vMonth > -1) {
-                                out.month = vMonth + 1;
+                        if (isNaN(iDatePart)) {
+                            vMonth = self.getMonth(vDatePart);
+                            if (vMonth > 0) {
+                                out.month = vMonth;
                             } else {
                                 return null;
                             }
