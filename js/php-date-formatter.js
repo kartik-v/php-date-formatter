@@ -168,13 +168,15 @@ var DateFormatter;
                         vMeriIndex = (vFormatParts.indexOf('a') > -1) ? vFormatParts.indexOf('a') :
                             (vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1;
                         mer = vDateParts[vMeriIndex];
-                        if (vMeriIndex > -1) {
+                        if (vMeriIndex !== -1) {
                             vMeriOffset = _compare(mer, vSettings.meridiem[0]) ? 0 :
                                 (_compare(mer, vSettings.meridiem[1]) ? 12 : -1);
-                            if (iDatePart >= 1 && iDatePart <= 12 && vMeriOffset > -1) {
-                                out.hour = iDatePart + vMeriOffset - 1;
-                            } else if (iDatePart >= 0 && iDatePart <= 23) {
-                                out.hour = iDatePart;
+                            if (iDatePart >= 1 && iDatePart <= 12 && vMeriOffset !== -1) {
+                                out.hour = iDatePart % 12 === 0 ? vMeriOffset : iDatePart + vMeriOffset;
+                            } else {
+                                if (iDatePart >= 0 && iDatePart <= 23) {
+                                    out.hour = iDatePart;
+                                }
                             }
                         } else {
                             if (iDatePart >= 0 && iDatePart <= 23) {
