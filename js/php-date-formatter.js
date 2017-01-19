@@ -584,7 +584,8 @@ var DateFormatter;
                     return vDate.getTime() / 1000 || 0;
                 }
             };
-            return doFormat(vChar, vChar);
+            //return doFormat(vChar, vChar);
+            return vChar.replace(backspace, doFormat);
         },
         formatDate: function (vDate, vFormat) {
             var self = this, i, n, len, str, vChar, vDateStr = '', BACKSLASH = '\\';
@@ -595,6 +596,8 @@ var DateFormatter;
                 }
             }
             if (vDate instanceof Date) {
+	            return self.parseFormat(vFormat,vDate);
+	            /*
                 len = vFormat.length;
                 for (i = 0; i < len; i++) {
                     vChar = vFormat.charAt(i);
@@ -613,6 +616,7 @@ var DateFormatter;
                     vDateStr += str;
                 }
                 return vDateStr;
+                */
             }
             return '';
         }
