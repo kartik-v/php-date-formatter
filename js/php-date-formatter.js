@@ -4,7 +4,7 @@
  *
  * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
  * This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery.
- * 
+ *
  * @see http://php.net/manual/en/function.date.php
  *
  * For more JQuery plugins visit http://plugins.krajee.com
@@ -122,16 +122,16 @@ var DateFormatter;
             if (!vFormatParts || vFormatParts.length === 0) {
                 throw new Error("Invalid date format definition.");
             }
+            for (i = vFormatParts.length - 1; i >= 0; i--) {
+                if (vFormatParts[i] == 'S') {
+                    vFormatParts.splice(i, 1);
+                }
+            }
             vDateParts = vDate.replace(self.separators, '\0').split('\0');
-            var vFormatPartsPosition = 0, vFormatPart;
             for (i = 0; i < vDateParts.length; i++) {
                 vDatePart = vDateParts[i];
                 iDatePart = parseInt(vDatePart);
-                vFormatPart = vFormatParts[vFormatPartsPosition++];
-                if (vFormatPartsPosition <= vFormatParts.length && vFormatParts[vFormatPartsPosition] == 'S') {
-                    vFormatPartsPosition++;
-                }
-                switch (vFormatPart) {
+                switch (vFormatParts[i]) {
                     case 'y':
                     case 'Y':
                         if (iDatePart) {
