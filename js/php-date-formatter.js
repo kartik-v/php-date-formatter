@@ -123,10 +123,15 @@ var DateFormatter;
                 throw new Error("Invalid date format definition.");
             }
             vDateParts = vDate.replace(self.separators, '\0').split('\0');
+            var vFormatPartsPosition = 0, vFormatPart;
             for (i = 0; i < vDateParts.length; i++) {
                 vDatePart = vDateParts[i];
                 iDatePart = parseInt(vDatePart);
-                switch (vFormatParts[i]) {
+                vFormatPart = vFormatParts[vFormatPartsPosition++];
+                if (vFormatPartsPosition <= vFormatParts.length && vFormatParts[vFormatPartsPosition] == 'S') {
+                    vFormatPartsPosition++;
+                }
+                switch (vFormatPart) {
                     case 'y':
                     case 'Y':
                         if (iDatePart) {
@@ -170,7 +175,7 @@ var DateFormatter;
                     case 'h':
                         vMeriIndex = (vFormatParts.indexOf('a') > -1) ? vFormatParts.indexOf('a') :
                             (vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1;
-                        mer = vDateParts[vMeriIndex];
+                        mer = String(vDateParts[vMeriIndex]).toUpperCase();
                         if (vMeriIndex !== -1) {
                             vMeriOffset = _compare(mer, vSettings.meridiem[0]) ? 0 :
                                 (_compare(mer, vSettings.meridiem[1]) ? 12 : -1);
