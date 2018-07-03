@@ -4,7 +4,7 @@
  *
  * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
  * This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery.
- * 
+ *
  * @see http://php.net/manual/en/function.date.php
  *
  * For more JQuery plugins visit http://plugins.krajee.com
@@ -19,19 +19,18 @@ function _compare(str1, str2) {
     return typeof str1 === 'string' && typeof str2 === 'string' && str1.toLowerCase() === str2.toLowerCase();
 }
 function _lpad(value, length, chr) {
-    var val = value.toString();
+    const val = value.toString();
     chr = chr || '0';
     return val.length < length ? _lpad(chr + val, length) : val;
 }
 function _extend(out) {
-    var i, obj;
     out = out || {};
-    for (i = 1; i < arguments.length; i++) {
-        obj = arguments[i];
+    for (let i = 1; i < arguments.length; i++) {
+        const obj = arguments[i];
         if (!obj) {
             continue;
         }
-        for (var key in obj) {
+        for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (typeof obj[key] === 'object') {
                     _extend(out[key], obj[key]);
@@ -44,7 +43,7 @@ function _extend(out) {
     return out;
 }
 function _indexOf(val, arr) {
-    for (var i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         if (arr[i].toLowerCase() === val.toLowerCase()) {
             return i;
         }
@@ -62,7 +61,7 @@ const defaultSettings = {
         monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         meridiem: ['AM', 'PM'],
         ordinal: function(number) {
-            var n = number % 10, suffixes = {1: 'st', 2: 'nd', 3: 'rd'};
+            const n = number % 10, suffixes = {1: 'st', 2: 'nd', 3: 'rd'};
             return Math.floor(number % 100 / 10) === 1 || !suffixes[n] ? 'th' : suffixes[n];
         }
     },
@@ -75,7 +74,7 @@ const defaultSettings = {
 
 export default class DateFormatter {
     constructor(options) {
-        var self = this, config = _extend(defaultSettings, options);
+        const self = this, config = _extend(defaultSettings, options);
         self.dateSettings = config.dateSettings;
         self.separators = config.separators;
         self.validParts = config.validParts;
@@ -85,17 +84,17 @@ export default class DateFormatter {
     }
 
     getMonth(val) {
-        var self = this, i;
-        i = _indexOf(val, self.dateSettings.monthsShort) + 1;
+        const self = this;
+        let i = _indexOf(val, self.dateSettings.monthsShort) + 1;
         if (i === 0) {
             i = _indexOf(val, self.dateSettings.months) + 1;
         }
         return i;
     }
     parseDate(vDate, vFormat) {
-        var self = this, vFormatParts, vDateParts, i, vDateFlag = false, vTimeFlag = false, vDatePart, iDatePart,
-            vSettings = self.dateSettings, vMonth, vMeriIndex, vMeriOffset, len, mer,
+        const self = this, vSettings = self.dateSettings,
             out = {date: null, year: null, month: null, day: null, hour: 0, min: 0, sec: 0};
+        let vDateFlag = false, vTimeFlag = false, i;
         if (!vDate) {
             return null;
         }
@@ -114,19 +113,19 @@ export default class DateFormatter {
             default:
                 return null;
         }
-        vFormatParts = vFormat.match(self.validParts);
+        const vFormatParts = vFormat.match(self.validParts);
         if (!vFormatParts || vFormatParts.length === 0) {
             throw new Error("Invalid date format definition.");
         }
-        vDateParts = vDate.replace(self.separators, '\0').split('\0');
+        const vDateParts = vDate.replace(self.separators, '\0').split('\0');
         for (i = 0; i < vDateParts.length; i++) {
-            vDatePart = vDateParts[i];
-            iDatePart = parseInt(vDatePart);
+            const vDatePart = vDateParts[i];
+            const iDatePart = parseInt(vDatePart);
             switch (vFormatParts[i]) {
                 case 'y':
                 case 'Y':
                     if (iDatePart) {
-                        len = vDatePart.length;
+                        const len = vDatePart.length;
                         out.year = len === 2 ? parseInt((iDatePart < 70 ? '20' : '19') + vDatePart) : iDatePart;
                     } else {
                         return null;
@@ -138,7 +137,7 @@ export default class DateFormatter {
                 case 'M':
                 case 'F':
                     if (isNaN(iDatePart)) {
-                        vMonth = self.getMonth(vDatePart);
+                        const vMonth = self.getMonth(vDatePart);
                         if (vMonth > 0) {
                             out.month = vMonth;
                         } else {
@@ -164,11 +163,11 @@ export default class DateFormatter {
                     break;
                 case 'g':
                 case 'h':
-                    vMeriIndex = (vFormatParts.indexOf('a') > -1) ? vFormatParts.indexOf('a') :
+                    const vMeriIndex = (vFormatParts.indexOf('a') > -1) ? vFormatParts.indexOf('a') :
                         (vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1;
-                    mer = vDateParts[vMeriIndex];
+                    const mer = vDateParts[vMeriIndex];
                     if (vMeriIndex !== -1) {
-                        vMeriOffset = _compare(mer, vSettings.meridiem[0]) ? 0 :
+                        const vMeriOffset = _compare(mer, vSettings.meridiem[0]) ? 0 :
                             (_compare(mer, vSettings.meridiem[1]) ? 12 : -1);
                         if (iDatePart >= 1 && iDatePart <= 12 && vMeriOffset !== -1) {
                             out.hour = iDatePart % 12 === 0 ? vMeriOffset : iDatePart + vMeriOffset;
@@ -227,17 +226,17 @@ export default class DateFormatter {
         if (typeof vDateStr !== 'string') {
             return vDateStr;
         }
-        var self = this, vParts = vDateStr.replace(self.separators, '\0').split('\0'), vPattern = /^[djmn]/g, len,
-            vFormatParts = vFormat.match(self.validParts), vDate = new Date(), vDigit = 0, vYear, i, n, iPart, iSec;
+        const self = this, vParts = vDateStr.replace(self.separators, '\0').split('\0'), vPattern = /^[djmn]/g,
+            vFormatParts = vFormat.match(self.validParts), vDate = new Date();
 
         if (!vPattern.test(vFormatParts[0])) {
             return vDateStr;
         }
 
-        for (i = 0; i < vParts.length; i++) {
-            vDigit = 2;
-            iPart = vParts[i];
-            iSec = parseInt(iPart.substr(0, 2));
+        for (let i = 0; i < vParts.length; i++) {
+            let vDigit = 2;
+            const iPart = vParts[i];
+            const iSec = parseInt(iPart.substr(0, 2));
             if (isNaN(iSec)) {
                 return null;
             }
@@ -257,8 +256,8 @@ export default class DateFormatter {
                     }
                     break;
                 case 2:
-                    vYear = vDate.getFullYear();
-                    len = iPart.length;
+                    let vYear = vDate.getFullYear();
+                    const len = iPart.length;
                     vDigit = len < 4 ? len : 4;
                     vYear = parseInt(len < 4 ? vYear.toString().substr(0, 4 - len) + iPart : iPart.substr(0, 4));
                     if (!vYear) {
@@ -276,7 +275,7 @@ export default class DateFormatter {
                     vDate.setSeconds(iSec);
                     break;
             }
-            n = iPart.substr(vDigit);
+            const n = iPart.substr(vDigit);
             if (n.length > 0) {
                 vParts.splice(i + 1, 0, n);
             }
@@ -284,7 +283,8 @@ export default class DateFormatter {
         return vDate;
     }
     parseFormat(vChar, vDate) {
-        var self = this, vSettings = self.dateSettings, fmt, backslash = /\\?(.?)/gi, doFormat = function(t, s) {
+        let fmt = null;
+        const self = this, vSettings = self.dateSettings, backslash = /\\?(.?)/gi, doFormat = function(t, s) {
             return fmt[t] ? fmt[t]() : s;
         };
         fmt = {
@@ -338,7 +338,7 @@ export default class DateFormatter {
              * @return {number}
              */
             z() {
-                var a = new Date(fmt.Y(), fmt.n() - 1, fmt.j()), b = new Date(fmt.Y(), 0, 1);
+                const a = new Date(fmt.Y(), fmt.n() - 1, fmt.j()), b = new Date(fmt.Y(), 0, 1);
                 return Math.round((a - b) / DAY);
             },
 
@@ -350,7 +350,7 @@ export default class DateFormatter {
              * @return {number}
              */
             W() {
-                var a = new Date(fmt.Y(), fmt.n() - 1, fmt.j() - fmt.N() + 3), b = new Date(a.getFullYear(), 0, 4);
+                const a = new Date(fmt.Y(), fmt.n() - 1, fmt.j() - fmt.N() + 3), b = new Date(a.getFullYear(), 0, 4);
                 return _lpad(1 + Math.round((a - b) / DAY / 7), 2);
             },
 
@@ -401,7 +401,7 @@ export default class DateFormatter {
              * @return {number}
              */
             L() {
-                var Y = fmt.Y();
+                const Y = fmt.Y();
                 return (Y % 4 === 0 && Y % 100 !== 0 || Y % 400 === 0) ? 1 : 0;
             },
             /**
@@ -409,7 +409,7 @@ export default class DateFormatter {
              * @return {number}
              */
             o() {
-                var n = fmt.n(), W = fmt.W(), Y = fmt.Y();
+                const n = fmt.n(), W = fmt.W(), Y = fmt.Y();
                 return Y + (n === 12 && W < 9 ? 1 : n === 1 && W > 9 ? -1 : 0);
             },
             /**
@@ -442,7 +442,7 @@ export default class DateFormatter {
              * @return {string}
              */
             A() {
-                var n = fmt.G() < 12 ? 0 : 1;
+                const n = fmt.G() < 12 ? 0 : 1;
                 return vSettings.meridiem[n];
             },
             /**
@@ -450,7 +450,7 @@ export default class DateFormatter {
              * @return {string}
              */
             B() {
-                var H = vDate.getUTCHours() * HOUR, i = vDate.getUTCMinutes() * 60, s = vDate.getUTCSeconds();
+                const H = vDate.getUTCHours() * HOUR, i = vDate.getUTCMinutes() * 60, s = vDate.getUTCSeconds();
                 return _lpad(Math.floor((H + i + s + HOUR) / 86.4) % 1000, 3);
             },
             /**
@@ -511,7 +511,7 @@ export default class DateFormatter {
              * @return {string}
              */
             e() {
-                var str = /\((.*)\)/.exec(String(vDate))[1];
+                const str = /\((.*)\)/.exec(String(vDate))[1];
                 return str || 'Coordinated Universal Time';
             },
             /**
@@ -519,7 +519,7 @@ export default class DateFormatter {
              * @return {number}
              */
             I() {
-                var a = new Date(fmt.Y(), 0), c = Date.UTC(fmt.Y(), 0),
+                const a = new Date(fmt.Y(), 0), c = Date.UTC(fmt.Y(), 0),
                     b = new Date(fmt.Y(), 6), d = Date.UTC(fmt.Y(), 6);
                 return ((a - c) !== (b - d)) ? 1 : 0;
             },
@@ -528,7 +528,7 @@ export default class DateFormatter {
              * @return {string}
              */
             O() {
-                var tzo = vDate.getTimezoneOffset(), a = Math.abs(tzo);
+                const tzo = vDate.getTimezoneOffset(), a = Math.abs(tzo);
                 return (tzo > 0 ? '-' : '+') + _lpad(Math.floor(a / 60) * 100 + a % 60, 4);
             },
             /**
@@ -536,7 +536,7 @@ export default class DateFormatter {
              * @return {string}
              */
             P() {
-                var O = fmt.O();
+                const O = fmt.O();
                 return (O.substr(0, 3) + ':' + O.substr(3, 2));
             },
             /**
@@ -544,7 +544,7 @@ export default class DateFormatter {
              * @return {string}
              */
             T() {
-                var str = (String(vDate).match(self.tzParts) || [""]).pop().replace(self.tzClip, "");
+                const str = (String(vDate).match(self.tzParts) || [""]).pop().replace(self.tzClip, "");
                 return str || 'UTC';
             },
             /**
@@ -583,7 +583,7 @@ export default class DateFormatter {
         return doFormat(vChar, vChar);
     }
     formatDate(vDate, vFormat) {
-        var self = this, i, n, len, str, vChar, vDateStr = '', BACKSLASH = '\\';
+        const self = this, BACKSLASH = '\\';
         if (typeof vDate === 'string') {
             vDate = self.parseDate(vDate, vFormat);
             if (!vDate) {
@@ -591,9 +591,10 @@ export default class DateFormatter {
             }
         }
         if (vDate instanceof Date) {
-            len = vFormat.length;
-            for (i = 0; i < len; i++) {
-                vChar = vFormat.charAt(i);
+            let vDateStr = '';
+            const len = vFormat.length;
+            for (let i = 0; i < len; i++) {
+                const vChar = vFormat.charAt(i);
                 if (vChar === 'S' || vChar === BACKSLASH) {
                     continue;
                 }
@@ -601,9 +602,9 @@ export default class DateFormatter {
                     vDateStr += vChar;
                     continue;
                 }
-                str = self.parseFormat(vChar, vDate);
+                let str = self.parseFormat(vChar, vDate);
                 if (i !== (len - 1) && self.intParts.test(vChar) && vFormat.charAt(i + 1) === 'S') {
-                    n = parseInt(str) || 0;
+                    const n = parseInt(str) || 0;
                     str += self.dateSettings.ordinal(n);
                 }
                 vDateStr += str;
