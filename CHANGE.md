@@ -1,6 +1,13 @@
 Change Log: `php-date-formatter`
 ================================
 
+## Version 2.0.0
+
+**Date:** ...
+
+1. (enh #20): Use es6 modules.
+2. (enh #20): Use es6 stuff like let, const and classes.
+
 ## Version 1.3.4
 
 **Date:** 08-Jan-2017
