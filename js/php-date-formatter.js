@@ -1,83 +1,104 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
- * @version 1.3.4
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2018
+ * @version 1.3.5
  *
  * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
- * This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery.
+ * This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery. The
+ * library also adds support for Universal Module Definition (UMD).
  * 
  * @see http://php.net/manual/en/function.date.php
  *
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
-var DateFormatter;
-(function () {
-    "use strict";
-
-    var _compare, _lpad, _extend, _indexOf, defaultSettings, DAY, HOUR;
-    DAY = 1000 * 60 * 60 * 24;
-    HOUR = 3600;
-
-    _compare = function (str1, str2) {
-        return typeof(str1) === 'string' && typeof(str2) === 'string' && str1.toLowerCase() === str2.toLowerCase();
-    };
-    _lpad = function (value, length, chr) {
-        var val = value.toString();
-        chr = chr || '0';
-        return val.length < length ? _lpad(chr + val, length) : val;
-    };
-    _extend = function (out) {
-        var i, obj;
-        out = out || {};
-        for (i = 1; i < arguments.length; i++) {
-            obj = arguments[i];
-            if (!obj) {
-                continue;
-            }
-            for (var key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    if (typeof obj[key] === 'object') {
-                        _extend(out[key], obj[key]);
-                    } else {
-                        out[key] = obj[key];
+(function (root, factory) {
+    // noinspection JSUnresolvedVariable
+    if (typeof define === 'function' && define.amd) { // AMD
+        // noinspection JSUnresolvedFunction
+        define([], factory);
+    } else {
+        // noinspection JSUnresolvedVariable
+        if (typeof module === 'object' && module.exports) { // Node
+            // noinspection JSUnresolvedVariable
+            module.exports = factory();
+        } else { // Browser globals
+            root.DateFormatter = factory();
+        }
+    }
+}(typeof self !== 'undefined' ? self : this, function () {
+    var DateFormatter, $h;
+    /**
+     * Global helper object
+     */
+    $h = {
+        DAY: 1000 * 60 * 60 * 24,
+        HOUR: 3600,
+        defaults: {
+            dateSettings: {
+                days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                months: [
+                    'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                    'August', 'September', 'October', 'November', 'December'
+                ],
+                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                meridiem: ['AM', 'PM'],
+                ordinal: function (number) {
+                    var n = number % 10, suffixes = {1: 'st', 2: 'nd', 3: 'rd'};
+                    return Math.floor(number % 100 / 10) === 1 || !suffixes[n] ? 'th' : suffixes[n];
+                }
+            },
+            separators: /[ \-+\/.T:@]/g,
+            validParts: /[dDjlNSwzWFmMntLoYyaABgGhHisueTIOPZcrU]/g,
+            intParts: /[djwNzmnyYhHgGis]/g,
+            tzParts: /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+            tzClip: /[^-+\dA-Z]/g
+        },
+        compare: function (str1, str2) {
+            return typeof(str1) === 'string' && typeof(str2) === 'string' && str1.toLowerCase() === str2.toLowerCase();
+        },
+        lpad: function (value, length, chr) {
+            var val = value.toString();
+            chr = chr || '0';
+            return val.length < length ? $h.lpad(chr + val, length) : val;
+        },
+        merge: function (out) {
+            var i, obj;
+            out = out || {};
+            for (i = 1; i < arguments.length; i++) {
+                obj = arguments[i];
+                if (!obj) {
+                    continue;
+                }
+                for (var key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        if (typeof obj[key] === 'object') {
+                            $h.merge(out[key], obj[key]);
+                        } else {
+                            out[key] = obj[key];
+                        }
                     }
                 }
             }
-        }
-        return out;
-    };
-    _indexOf = function (val, arr) {
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i].toLowerCase() === val.toLowerCase()) {
-                return i;
-            }
-        }
-        return -1;
-    };
-    defaultSettings = {
-        dateSettings: {
-            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            months: [
-                'January', 'February', 'March', 'April', 'May', 'June', 'July',
-                'August', 'September', 'October', 'November', 'December'
-            ],
-            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            meridiem: ['AM', 'PM'],
-            ordinal: function (number) {
-                var n = number % 10, suffixes = {1: 'st', 2: 'nd', 3: 'rd'};
-                return Math.floor(number % 100 / 10) === 1 || !suffixes[n] ? 'th' : suffixes[n];
-            }
+            return out;
         },
-        separators: /[ \-+\/\.T:@]/g,
-        validParts: /[dDjlNSwzWFmMntLoYyaABgGhHisueTIOPZcrU]/g,
-        intParts: /[djwNzmnyYhHgGis]/g,
-        tzParts: /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
-        tzClip: /[^-+\dA-Z]/g
+        getIndex: function (val, arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].toLowerCase() === val.toLowerCase()) {
+                    return i;
+                }
+            }
+            return -1;
+        }
     };
 
+    /**
+     * Date Formatter Library Constructor
+     * @param options
+     * @constructor
+     */
     DateFormatter = function (options) {
-        var self = this, config = _extend(defaultSettings, options);
+        var self = this, config = $h.merge($h.defaults, options);
         self.dateSettings = config.dateSettings;
         self.separators = config.separators;
         self.validParts = config.validParts;
@@ -86,13 +107,16 @@ var DateFormatter;
         self.tzClip = config.tzClip;
     };
 
+    /**
+     * DateFormatter Library Prototype
+     */
     DateFormatter.prototype = {
         constructor: DateFormatter,
         getMonth: function (val) {
             var self = this, i;
-            i = _indexOf(val, self.dateSettings.monthsShort) + 1;
+            i = $h.getIndex(val, self.dateSettings.monthsShort) + 1;
             if (i === 0) {
-                i = _indexOf(val, self.dateSettings.months) + 1;
+                i = $h.getIndex(val, self.dateSettings.months) + 1;
             }
             return i;
         },
@@ -172,8 +196,8 @@ var DateFormatter;
                             (vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1;
                         mer = vDateParts[vMeriIndex];
                         if (vMeriIndex !== -1) {
-                            vMeriOffset = _compare(mer, vSettings.meridiem[0]) ? 0 :
-                                (_compare(mer, vSettings.meridiem[1]) ? 12 : -1);
+                            vMeriOffset = $h.compare(mer, vSettings.meridiem[0]) ? 0 :
+                                ($h.compare(mer, vSettings.meridiem[1]) ? 12 : -1);
                             if (iDatePart >= 1 && iDatePart <= 12 && vMeriOffset !== -1) {
                                 out.hour = iDatePart % 12 === 0 ? vMeriOffset : iDatePart + vMeriOffset;
                             } else {
@@ -217,8 +241,9 @@ var DateFormatter;
                         break;
                 }
             }
-            if (vDateFlag === true && out.year && out.month && out.day) {
-                out.date = new Date(out.year, out.month - 1, out.day, out.hour, out.min, out.sec, 0);
+            if (vDateFlag === true) {
+                var varY = out.year || 0, varM = out.month ? out.month - 1 : 0, varD = out.day || 1;
+                out.date = new Date(varY, varM, varD, out.hour, out.min, out.sec, 0);
             } else {
                 if (vTimeFlag !== true) {
                     return null;
@@ -300,7 +325,7 @@ var DateFormatter;
                  * @return {string}
                  */
                 d: function () {
-                    return _lpad(fmt.j(), 2);
+                    return $h.lpad(fmt.j(), 2);
                 },
                 /**
                  * Shorthand day name: `Mon...Sun`
@@ -318,7 +343,7 @@ var DateFormatter;
                 },
                 /**
                  * Full day name: `Monday...Sunday`
-                 * @return {number}
+                 * @return {string}
                  */
                 l: function () {
                     return vSettings.days[fmt.w()];
@@ -343,7 +368,7 @@ var DateFormatter;
                  */
                 z: function () {
                     var a = new Date(fmt.Y(), fmt.n() - 1, fmt.j()), b = new Date(fmt.Y(), 0, 1);
-                    return Math.round((a - b) / DAY);
+                    return Math.round((a - b) / $h.DAY);
                 },
 
                 //////////
@@ -355,7 +380,7 @@ var DateFormatter;
                  */
                 W: function () {
                     var a = new Date(fmt.Y(), fmt.n() - 1, fmt.j() - fmt.N() + 3), b = new Date(a.getFullYear(), 0, 4);
-                    return _lpad(1 + Math.round((a - b) / DAY / 7), 2);
+                    return $h.lpad(1 + Math.round((a - b) / $h.DAY / 7), 2);
                 },
 
                 ///////////
@@ -373,7 +398,7 @@ var DateFormatter;
                  * @return {string}
                  */
                 m: function () {
-                    return _lpad(fmt.n(), 2);
+                    return $h.lpad(fmt.n(), 2);
                 },
                 /**
                  * Shorthand month name; `Jan...Dec`
@@ -454,8 +479,8 @@ var DateFormatter;
                  * @return {string}
                  */
                 B: function () {
-                    var H = vDate.getUTCHours() * HOUR, i = vDate.getUTCMinutes() * 60, s = vDate.getUTCSeconds();
-                    return _lpad(Math.floor((H + i + s + HOUR) / 86.4) % 1000, 3);
+                    var H = vDate.getUTCHours() * $h.HOUR, i = vDate.getUTCMinutes() * 60, s = vDate.getUTCSeconds();
+                    return $h.lpad(Math.floor((H + i + s + $h.HOUR) / 86.4) % 1000, 3);
                 },
                 /**
                  * 12-Hours: `1..12`
@@ -476,35 +501,35 @@ var DateFormatter;
                  * @return {string}
                  */
                 h: function () {
-                    return _lpad(fmt.g(), 2);
+                    return $h.lpad(fmt.g(), 2);
                 },
                 /**
                  * 24-Hours w/leading 0: `00..23`
                  * @return {string}
                  */
                 H: function () {
-                    return _lpad(fmt.G(), 2);
+                    return $h.lpad(fmt.G(), 2);
                 },
                 /**
                  * Minutes w/leading 0: `00..59`
                  * @return {string}
                  */
                 i: function () {
-                    return _lpad(vDate.getMinutes(), 2);
+                    return $h.lpad(vDate.getMinutes(), 2);
                 },
                 /**
                  * Seconds w/leading 0: `00..59`
                  * @return {string}
                  */
                 s: function () {
-                    return _lpad(vDate.getSeconds(), 2);
+                    return $h.lpad(vDate.getSeconds(), 2);
                 },
                 /**
                  * Microseconds: `000000-999000`
                  * @return {string}
                  */
                 u: function () {
-                    return _lpad(vDate.getMilliseconds() * 1000, 6);
+                    return $h.lpad(vDate.getMilliseconds() * 1000, 6);
                 },
 
                 //////////////
@@ -533,7 +558,7 @@ var DateFormatter;
                  */
                 O: function () {
                     var tzo = vDate.getTimezoneOffset(), a = Math.abs(tzo);
-                    return (tzo > 0 ? '-' : '+') + _lpad(Math.floor(a / 60) * 100 + a % 60, 4);
+                    return (tzo > 0 ? '-' : '+') + $h.lpad(Math.floor(a / 60) * 100 + a % 60, 4);
                 },
                 /**
                  * Difference to GMT with colon: `e.g. +02:00`
@@ -617,4 +642,5 @@ var DateFormatter;
             return '';
         }
     };
-})();
+    return DateFormatter;
+}));

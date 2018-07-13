@@ -15,7 +15,7 @@ server side and client side validation should help in building extensible applic
 
 This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery.
 
-The latest release of the library is v1.3.4. Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for details.
+The latest release of the library is v1.3.5. Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for details.
 
 ## Features
 
