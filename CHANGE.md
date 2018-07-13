@@ -7,6 +7,7 @@ Change Log: `php-date-formatter`
 
 - (enh #20, #18): Add UMD support for AMD, node, browser globals.
 - (enh #19): Enhance `parseData` for formats where year, month or day is optional.
+- (bug #15): Correct ordinal suffix.
 - (enh #14): Remove usage of reserved word as function attribute.
 - (enh #10): Better handling of escaped characters in string format.
 

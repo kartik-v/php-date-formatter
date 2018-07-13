@@ -146,6 +146,11 @@
             if (!vFormatParts || vFormatParts.length === 0) {
                 throw new Error("Invalid date format definition.");
             }
+            for (i = vFormatParts.length - 1; i >= 0; i--) {
+                if (vFormatParts[i] === 'S') {
+                    vFormatParts.splice(i, 1);
+                }
+            }
             vDateParts = vDate.replace(self.separators, '\0').split('\0');
             for (i = 0; i < vDateParts.length; i++) {
                 vDatePart = vDateParts[i];
@@ -193,7 +198,7 @@
                     case 'g':
                     case 'h':
                         vMeriIndex = (vFormatParts.indexOf('a') > -1) ? vFormatParts.indexOf('a') :
-                            (vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1;
+                            ((vFormatParts.indexOf('A') > -1) ? vFormatParts.indexOf('A') : -1);
                         mer = vDateParts[vMeriIndex];
                         if (vMeriIndex !== -1) {
                             vMeriOffset = $h.compare(mer, vSettings.meridiem[0]) ? 0 :
