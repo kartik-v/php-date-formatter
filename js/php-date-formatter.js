@@ -1,6 +1,6 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2018
- * @version 1.3.5
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2020
+ * @version 1.3.6
  *
  * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
  * This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery. The
@@ -48,14 +48,14 @@
                     return Math.floor(number % 100 / 10) === 1 || !suffixes[n] ? 'th' : suffixes[n];
                 }
             },
-            separators: /[ \-+\/.T:@]/g,
+            separators: /[ \-+\/.:@]/g,
             validParts: /[dDjlNSwzWFmMntLoYyaABgGhHisueTIOPZcrU]/g,
             intParts: /[djwNzmnyYhHgGis]/g,
             tzParts: /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
             tzClip: /[^-+\dA-Z]/g
         },
         compare: function (str1, str2) {
-            return typeof(str1) === 'string' && typeof(str2) === 'string' && str1.toLowerCase() === str2.toLowerCase();
+            return typeof (str1) === 'string' && typeof (str2) === 'string' && str1.toLowerCase() === str2.toLowerCase();
         },
         lpad: function (value, length, chr) {
             var val = value.toString();
@@ -144,7 +144,7 @@
             }
             vFormatParts = vFormat.match(self.validParts);
             if (!vFormatParts || vFormatParts.length === 0) {
-                throw new Error("Invalid date format definition.");
+                throw new Error('Invalid date format definition.');
             }
             for (i = vFormatParts.length - 1; i >= 0; i--) {
                 if (vFormatParts[i] === 'S') {
@@ -578,7 +578,7 @@
                  * @return {string}
                  */
                 T: function () {
-                    var str = (String(vDate).match(self.tzParts) || [""]).pop().replace(self.tzClip, "");
+                    var str = (String(vDate).match(self.tzParts) || ['']).pop().replace(self.tzClip, '');
                     return str || 'UTC';
                 },
                 /**
