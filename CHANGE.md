@@ -6,6 +6,7 @@ Change Log: `php-date-formatter`
 **Date:** 14-Apr-2020
 
 - (enh #24): Correct date format error for characters containing `T`.
+- (enh #22): Correct `parseInt` for older browsers.
 
 ## Version 1.3.5
 

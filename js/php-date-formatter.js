@@ -54,6 +54,9 @@
             tzParts: /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
             tzClip: /[^-+\dA-Z]/g
         },
+        getInt: function (str, radix) {
+            return parseInt(str, (radix ? radix : 10));
+        },
         compare: function (str1, str2) {
             return typeof (str1) === 'string' && typeof (str2) === 'string' && str1.toLowerCase() === str2.toLowerCase();
         },
@@ -131,7 +134,7 @@
                 return vDate;
             }
             if (vFormat === 'U') {
-                i = parseInt(vDate);
+                i = $h.getInt(vDate);
                 return i ? new Date(i * 1000) : vDate;
             }
             switch (typeof vDate) {
@@ -154,13 +157,13 @@
             vDateParts = vDate.replace(self.separators, '\0').split('\0');
             for (i = 0; i < vDateParts.length; i++) {
                 vDatePart = vDateParts[i];
-                iDatePart = parseInt(vDatePart);
+                iDatePart = $h.getInt(vDatePart);
                 switch (vFormatParts[i]) {
                     case 'y':
                     case 'Y':
                         if (iDatePart) {
                             len = vDatePart.length;
-                            out.year = len === 2 ? parseInt((iDatePart < 70 ? '20' : '19') + vDatePart) : iDatePart;
+                            out.year = len === 2 ? $h.getInt((iDatePart < 70 ? '20' : '19') + vDatePart) : iDatePart;
                         } else {
                             return null;
                         }
@@ -271,7 +274,7 @@
             for (i = 0; i < vParts.length; i++) {
                 vDigit = 2;
                 iPart = vParts[i];
-                iSec = parseInt(iPart.substr(0, 2));
+                iSec = $h.getInt(iPart.substr(0, 2));
                 if (isNaN(iSec)) {
                     return null;
                 }
@@ -294,7 +297,7 @@
                         vYear = vDate.getFullYear();
                         len = iPart.length;
                         vDigit = len < 4 ? len : 4;
-                        vYear = parseInt(len < 4 ? vYear.toString().substr(0, 4 - len) + iPart : iPart.substr(0, 4));
+                        vYear = $h.getInt(len < 4 ? vYear.toString().substr(0, 4 - len) + iPart : iPart.substr(0, 4));
                         if (!vYear) {
                             return null;
                         }
@@ -637,7 +640,7 @@
                     }
                     str = self.parseFormat(vChar, vDate);
                     if (i !== (len - 1) && self.intParts.test(vChar) && vFormat.charAt(i + 1) === 'S') {
-                        n = parseInt(str) || 0;
+                        n = $h.getInt(str) || 0;
                         str += self.dateSettings.ordinal(n);
                     }
                     vDateStr += str;
