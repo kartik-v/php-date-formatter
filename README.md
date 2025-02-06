@@ -25,14 +25,14 @@ server side and client side validation should help in building extensible applic
 
 This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery.
 
-The latest release of the library is v1.3.6. Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for details.
+Check the [CHANGE LOG](https://github.com/kartik-v/php-date-formatter/blob/master/CHANGE.md) for release details.
 
 ## Features
 
 - Parse date/time strings or a Date object, and convert it into Javascript Date Object by passing any of the [PHP DateTime formats](http://php.net/manual/en/function.date.php).
 - Automatically guess date/time strings, even if it does not exactly match the format, and convert it into Javascript Date Object.
 - Read date/time strings or a Date object, and format it as per a [PHP DateTime format](http://php.net/manual/en/function.date.php).
-- With release v1.3.2 the library has been converted to use pure javacript code without dependency on jQuery or other third party JS library.
+- With release v1.3.2 the library has been converted to use pure javascript code without dependency on jQuery or other third party JS library.
 
 ## Documentation and Demo
 

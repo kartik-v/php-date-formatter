@@ -1,6 +1,13 @@
 Change Log: `php-date-formatter`
 ================================
 
+## Version 1.3.7
+
+**Date:** 07-Feb-2025
+
+- (enh #29): Prevent prototype pollution vulnerability.
+- (enh #28): Add timezone AEST.
+
 ## Version 1.3.6
 
 **Date:** 14-Apr-2020
