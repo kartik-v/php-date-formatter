@@ -650,6 +650,6 @@
             return '';
         }
     };
-	Object.freeze(DateFormatter);
+    Object.freeze(DateFormatter);
     return DateFormatter;
 }));
